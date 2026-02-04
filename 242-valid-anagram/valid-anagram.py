@@ -5,8 +5,8 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        s = sorted(s);
-        t = sorted(t);
+        counter_s = Counter(s);
+        counter_t = Counter(t);
 
-        return s == t
+        return counter_s == counter_t
         
