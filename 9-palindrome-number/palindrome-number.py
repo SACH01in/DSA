@@ -16,5 +16,5 @@ class Solution(object):
 
         return original == reversed;
 
-        return false
+        return False
         
