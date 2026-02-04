@@ -3,12 +3,11 @@ private:
     vector<int> prefix;
 public:
     NumArray(vector<int>& nums) {
-        for(int i = 0; i < nums.size(); i++){
-            if (i == 0){
-                prefix.push_back(nums[0]);
-                continue;
-            }
-            prefix.push_back(nums[i] + prefix[prefix.size() - 1]);
+        int n = nums.size();
+        prefix.resize(n);
+        prefix[0] = nums[0];
+        for (int i = 1;i<nums.size();i++){
+            prefix[i] = nums[i] + prefix[i-1];
         }
     }
     
