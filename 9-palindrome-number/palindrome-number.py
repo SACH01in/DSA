@@ -15,6 +15,4 @@ class Solution(object):
             x = x // 10;
 
         return original == reversed;
-
-        return False
         
