@@ -14,7 +14,7 @@ class Solution(object):
 
         if(target > x+y):
             return False
-        elif (target == x+y):
+        elif (x == target or y == target or target == x+y):
             return True
         elif (target % GCD(x,y) == 0):
             return True
