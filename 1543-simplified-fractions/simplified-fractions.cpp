@@ -2,13 +2,15 @@ class Solution {
 public:
     vector<string> simplifiedFractions(int n) {
         vector<string> res;
-        for(int nu = 1; nu < n; nu++){
-            for(int de = nu +1 ; de < n+1; de++){
-                if(gcd(nu,de) == 1){
-                    res.push_back(to_string(nu) + "/" + to_string(de));
+
+        for (int den = 2; den <= n; den++) {
+            for (int num = 1; num < den; num++) {
+                if (__gcd(num, den) == 1) {
+                    res.push_back(to_string(num) + "/" + to_string(den));
                 }
             }
         }
+
         return res;
     }
 };
