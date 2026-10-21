@@ -1,31 +1,33 @@
 class Solution {
 public:
-    int myAtoi(string s) {
-        int i = 0, n = s.length(), sign = 1;
-        long long result = 0;
-        
-        while (i < n && s[i] == ' ') {
+    int myAtoi(string s) 
+    {
+        int i=0;
+        int sign=1;
+        long ans=0;
+        while(i<s.length() && s[i]==' ')
+            i++;
+        if(s[i]=='-')
+        {
+            sign=-1;
             i++;
         }
-        
-        if (i < n) {
-            if (s[i] == '-') {
-                sign = -1;
-                i++;
-            } else if (s[i] == '+') {
+        else if(s[i]=='+')
+            i++;
+        while(i<s.length())
+        {
+            if(s[i]>='0' && s[i]<='9')
+            {
+                ans=ans*10+(s[i]-'0');
+                if(ans>INT_MAX && sign==-1)
+                    return INT_MIN;
+                else if(ans>INT_MAX && sign==1)
+                    return INT_MAX;
                 i++;
             }
+            else
+                return ans*sign;
         }
-        
-        while (i < n && s[i] >= '0' && s[i] <= '9') {
-            result = result * 10 + (s[i] - '0');
-            
-            if (result * sign > INT_MAX) return INT_MAX;
-            if (result * sign < INT_MIN) return INT_MIN;
-            
-            i++;
-        }
-        
-        return result * sign;
+        return (ans*sign);
     }
 };
