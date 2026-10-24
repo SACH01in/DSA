@@ -3,35 +3,37 @@
 class Solution {
 public:
     bool isNumber(std::string s) {
-        bool seenDigit = false;
-        bool seenExponent = false;
-        bool seenDot = false;
-        int n = s.length();
+        int i = 0, n = s.length();
+        if (n == 0) return false;
         
-        for (int i = 0; i < n; ++i) {
-            char c = s[i];
-            if (c >= '0' && c <= '9') {
-                seenDigit = true;
-            } else if (c == '+' || c == '-') {
-                if (i > 0 && s[i - 1] != 'e' && s[i - 1] != 'E') {
-                    return false;
-                }
-            } else if (c == '.') {
-                if (seenDot || seenExponent) {
-                    return false;
-                }
-                seenDot = true;
-            } else if (c == 'e' || c == 'E') {
-                if (seenExponent || !seenDigit) {
-                    return false;
-                }
-                seenExponent = true;
-                seenDigit = false;
-            } else {
-                return false;
+        if (s[i] == '+' || s[i] == '-') i++;
+        
+        int countDigits = 0;
+        
+        while (i < n && s[i] >= '0' && s[i] <= '9') {
+            i++;
+            countDigits++;
+        }
+        
+        if (i < n && s[i] == '.') {
+            i++;
+            while (i < n && s[i] >= '0' && s[i] <= '9') {
+                i++;
+                countDigits++;
             }
         }
         
-        return seenDigit;
+        if (countDigits > 0 && i < n && (s[i] == 'e' || s[i] == 'E')) {
+            i++;
+            if (i < n && (s[i] == '+' || s[i] == '-')) i++;
+            int expDigits = 0;
+            while (i < n && s[i] >= '0' && s[i] <= '9') {
+                i++;
+                expDigits++;
+            }
+            if (expDigits == 0) return false;
+        }
+        
+        return i == n && countDigits > 0;
     }
 };
